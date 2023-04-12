@@ -1,0 +1,57 @@
+.vcard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.photo {
+    margin-right: 20px;
+}
+
+.photo img {
+    border-radius: 50%;
+}
+
+.info h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.info .job {
+    font-style: italic;
+    margin: 5px 0;
+}
+
+.info p {
+    margin: 5px 0;
+}
+
+.info p.email:before {
+    content: "\2709";
+    margin-right: 5px;
+}
+
+.info p.phone:before {
+    content: "\260E";
+    margin-right: 5px;
+}
+
+.info p.address:before {
+    content: "\1F4CD";
+    margin-right: 5px;
+}
+
+.info p.website a {
+    text-decoration: none;
+    color: #333;
+}
+
+.info p.website a:hover {
+    text-decoration: underline;
+}

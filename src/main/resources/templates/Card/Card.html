@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vcard con Bootstrap y Thymeleaf</title>
+    <link rel="stylesheet" href="/static/bootstrap.min.css"/>
+    <!-- Agregar las siguientes líneas en el head de tu archivo HTML -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" />
+
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius:10px;
+            background-color: palegoldenrod;
+        }
+        .card {
+            /*max-width: 600px;*/
+            /*margin: 0 auto;
+            margin-top: 50px;
+            border-radius: 5px;
+            width: 100%;*/
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            margin-bottom:30px;
+
+        }
+        .item {
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        .panel-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #dc3545;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .name {
+            font-size: 24px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .job-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .company {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .location {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .social-icons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .social-icon {
+            font-size: 20px;
+            color: #fff;
+            background-color: #333;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-body-right {
+            width: 70%;
+            padding: 20px;
+        }
+
+        .data-list {
+            list-style: none;
+
+            padding: 0;
+            margin: 0;
+        }
+
+        .data-list-item {
+            padding-left: 20px;
+            padding-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .data-label {
+            font-weight: bold;
+            display: inline-block;
+            width: 100px;
+        }
+
+        .data-value {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="card">
+    <div class="panel-left item">
+        <img th:src="${persona.foto}" class="w-100 h-100 object-fit-cover" alt="Imagen de ejemplo" style="width: 50px; height: 50px">
+
+        <div class="name" th:text="${persona.nombre}"></div>
+        <div class="job-title" th:text="${persona.cargo}"></div>
+        <div class="company" th:text="${persona.empresa}"></div>
+        <div class="location" th:text="${persona.direccion}"></div>
+        <div class="social-icons">
+            <a th:each="red: ${persona.redesList}" th:href="${red.enlace}" ><i th:class="${red.icono}"></i></a>
+        </div>
+    </div>
+    <div class="item">
+        <ul class="data-list">
+            <li class="data-list-item">
+                <i>
+                    <img th:src="@{https://cdn-icons-png.flaticon.com/512/681/681494.png?w=740&t=st=1681319211~exp=1681319811~hmac=2ff58f3844f158edbd2c21b1643331758cbf7438fda464317dda0cd696cc727c}" alt="Icono" style="width: 20px; height: auto; margin-right: 10px;">
+                </i>
+                <span class="data-label">Nombre:</span>
+                <span class="data-value" th:text="${persona.nombre}"></span>
+            </li>
+
+            <li class="data-list-item">
+                <i>
+                    <img th:src="@{https://cdn-icons-png.flaticon.com/512/1250/1250996.png?w=740&t=st=1681318824~exp=1681319424~hmac=8b36ed50c7019da31325b0a80496e26f44546069f4f927a6acd09a1b8d849333}" alt="Icono" style="width: 20px; height: auto; margin-right: 10px;">
+                </i>
+                <span class="data-label">Ciudad:</span>
+                <span class="data-value" th:text="${persona.direccion}"> </span>
+            </li>
+            <li class="data-list-item">
+                <i>
+                    <img th:src="@{https://cdn-icons-png.flaticon.com/512/88/88036.png?w=740&t=st=1681319202~exp=1681319802~hmac=4b9ad890aa33bfc05a208ee6f73f648c1047550ca3afbcfc8c224485dbd5c09b}" alt="Icono" style="width: 20px; height: auto; margin-right: 10px;">
+                </i>
+                <span class="data-label">Horarios:</span>
+                <span class="data-value" th:text="${persona.horarios}">></span>
+            </li>
+            <li class="data-list-item">
+                <i>
+                    <img th:src="@{https://cdn-icons-png.flaticon.com/512/1250/1250973.png?w=740&t=st=1681319336~exp=1681319936~hmac=c1bc5f46c8563261ddc9043c368b8336fcdfe8b6ad476371ae17ac63162ef6bf}" alt="Icono" style="width: 20px; height: auto; margin-right: 10px;">
+                </i>
+                <span class="data-label">Correo:</span>
+                <span class="data-value" th:text="${persona.correo}"></span>
+            </li>
+            <li class="data-list-item">
+                <i>
+                    <img th:src="@{https://img.freepik.com/iconos-gratis/telefono-auricular_318-1028.jpg?w=740&t=st=1681319196~exp=1681319796~hmac=f2c3c84c63c0763d87719d1c985fcb33ddb7f5b3dde52e18e3bc593e66c90e93}" alt="Icono" style="width: 20px; height: auto; margin-right: 10px;">
+                </i>
+                <span class="data-label">Celular:</span>
+                <span class="data-value" th:text="${persona.celular}"></span>
+            </li>
+            <li class="data-list-item">
+                <i>
+                    <img th:src="@{https://cdn-icons-png.flaticon.com/512/1239/1239345.png?w=740&t=st=1681319293~exp=1681319893~hmac=c449efdb53a1c3d1e86c82b1baa3e58dea29c4d7a41ae84f32f69a7a19dcde5d}" alt="Icono" style="width: 20px; height: auto; margin-right: 10px;">
+                </i>
+                <span class="data-label">Pagina web:</span>
+                <span class="data-value"><a th:href="${persona.paginaWeb}" th:text="${persona.paginaWeb}"></a></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+<script src="/static/jquery.min.js"></script>
+<script src="/static/bootstrap.min.js"></script>
+</body>
+</html>
